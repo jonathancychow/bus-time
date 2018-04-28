@@ -21,8 +21,8 @@ ui_locale = '' # e.g. 'fr_FR' fro French, '' as default
 time_format = 12 # 12 or 24
 date_format = "%b %d, %Y" # check python doc for strftime() for options
 news_country_code = 'uk'
-weather_api_token = '23568d1716971c7eafa4e9cae6680d3f' # create account at https://darksky.net/dev/
-city_mapper_api_token = '23568d1716971c7eafa4e9cae6680d3f' # create account at https://citymapper.3scale.net/
+weather_api_token = '' # create account at https://darksky.net/dev/
+city_mapper_api_token = '' # create account at https://citymapper.3scale.net/
 bus_line="199"
 weather_lang = 'en' # see https://darksky.net/dev/docs/forecast for full list of language parameters values
 weather_unit = 'us' # see https://darksky.net/dev/docs/forecast for full list of unit parameters values
@@ -292,7 +292,7 @@ class Bustime(Frame):
             time_now = time.strftime('%H:%M')  # hour in 12h format
             time_delta = datetime.strptime(departure_time,'%H:%M') - datetime.strptime(time_now,'%H:%M')
             minute_left = int(time_delta.seconds/60)
-            display = str(minute_left) + ' mins left for your next bus'
+            display = str(minute_left) + ' mins till your next bus'
             self.bustimeLbl.config(text=display)
 
         except Exception as e:
