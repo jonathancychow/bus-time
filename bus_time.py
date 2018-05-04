@@ -345,17 +345,17 @@ class FullscreenWindow:
         self.tk.bind("<Return>", self.toggle_fullscreen)
         self.tk.bind("<Escape>", self.end_fullscreen)
         # clock
-        self.clock = Clock(self.topFrame)
-        self.clock.pack(side=RIGHT, anchor=N, padx=100, pady=60)
+        self.clock = Clock(self.bottomFrame)
+        self.clock.pack(side=RIGHT, anchor=S, padx=100, pady=60)
         # weather
         # self.weather = Weather(self.topFrame)
         # self.weather.pack(side=LEFT, anchor=N, padx=100, pady=60)
         #Bus time
-        self.Bustime = Bustime(self.topFrame)
-        self.Bustime.pack(side=LEFT, anchor=N, padx=100, pady=60)
+        self.Bustime = Bustime(self.bottomFrame)
+        self.Bustime.pack(side=LEFT, anchor=S, padx=100, pady=60)
         # news
-        self.news = News(self.bottomFrame)
-        self.news.pack(side=LEFT, anchor=S, padx=100, pady=60)
+        #self.news = News(self.bottomFrame)
+        #self.news.pack(side=LEFT, anchor=S, padx=100, pady=60)
         # calender - removing for now
         # self.calender = Calendar(self.bottomFrame)
         # self.calender.pack(side = RIGHT, anchor=S, padx=100, pady=60)
