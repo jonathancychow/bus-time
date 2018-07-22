@@ -1,7 +1,3 @@
-# smartmirror.py
-# requirements
-# requests, feedparser, traceback, Pillow
-
 from tkinter import *
 import locale
 import threading
@@ -81,7 +77,6 @@ class Clock(Frame):
             # could use >200 ms, but display gets jerky
             self.timeLbl.after(200, self.tick)
 
-
 class News(Frame):
     def __init__(self, parent, *args, **kwargs):
         Frame.__init__(self, parent, *args, **kwargs)
@@ -118,16 +113,13 @@ class News(Frame):
 class NewsHeadline(Frame):
     def __init__(self, parent, event_name=""):
         Frame.__init__(self, parent, bg='black')
-
         image = Image.open("assets/Newspaper.png")
         image = image.resize((25, 25), Image.ANTIALIAS)
         image = image.convert('RGB')
         photo = ImageTk.PhotoImage(image)
-
         self.iconLbl = Label(self, bg='black', image=photo)
         self.iconLbl.image = photo
         self.iconLbl.pack(side=LEFT, anchor=N)
-
         self.eventName = event_name
         self.eventNameLbl = Label(self, text=self.eventName, font=('Helvetica', small_text_size), fg="white", bg="black")
         self.eventNameLbl.pack(side=LEFT, anchor=N)
@@ -136,7 +128,6 @@ class Bustime(Frame):
     def __init__(self, parent, *args, **kwargs):
         Frame.__init__(self, parent, *args, **kwargs)
         self.config(bg='black')
-
         # self.minute_left = ''
         self.title = 'BUS'
         # self.bustimeLbl = self.minute_left
@@ -148,7 +139,7 @@ class Bustime(Frame):
 
     def get_bustime(self):
         try:
-            location_req_url = "https://transportapi.com/v3/uk/bus/stop/490006258W/live.json?app_id=68e2368a&app_key=123876d95adc4e2588a5939e7de860ef&group=route&nextbuses=yes"
+            location_req_url = ''
             # get json data
             r = requests.get(location_req_url)
             bustime_obj = json.loads(r.text)
@@ -179,7 +170,6 @@ class Calendar(Frame):
     def get_events(self):
         #TODO: implement this method
         # reference https://developers.google.com/google-apps/calendar/quickstart/python
-
         # remove all children
         for widget in self.calendarEventContainer.winfo_children():
             widget.destroy()
@@ -188,7 +178,6 @@ class Calendar(Frame):
         calendar_event.pack(side=TOP, anchor=E)
         pass
 
-
 class CalendarEvent(Frame):
     def __init__(self, parent, event_name="Event 1"):
         Frame.__init__(self, parent, bg='black')
@@ -196,9 +185,7 @@ class CalendarEvent(Frame):
         self.eventNameLbl = Label(self, text=self.eventName, font=('Helvetica', small_text_size), fg="white", bg="black")
         self.eventNameLbl.pack(side=TOP, anchor=E)
 
-
 class FullscreenWindow:
-
     def __init__(self):
         self.tk = Tk()
         self.tk.configure(background='black')
@@ -212,9 +199,6 @@ class FullscreenWindow:
         # clock
         self.clock = Clock(self.bottomFrame)
         self.clock.pack(side=RIGHT, anchor=S, padx=100, pady=60)
-        # weather
-        # self.weather = Weather(self.topFrame)
-        # self.weather.pack(side=LEFT, anchor=N, padx=100, pady=60)
         #Bus time
         self.Bustime = Bustime(self.bottomFrame)
         self.Bustime.pack(side=LEFT, anchor=S, padx=100, pady=60)
