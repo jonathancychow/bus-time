@@ -18,6 +18,7 @@ time_format = 12 # 12 or 24
 date_format = "%b %d, %Y" # check python doc for strftime() for options
 news_country_code = 'uk'
 bus_line="199"
+bus_time_api=""
 weather_lang = 'en' # see https://darksky.net/dev/docs/forecast for full list of language parameters values
 weather_unit = 'us' # see https://darksky.net/dev/docs/forecast for full list of unit parameters values
 latitude = None#'51.421584' # Set this if IP location lookup does not work for you (must be a string)
@@ -139,12 +140,11 @@ class Bustime(Frame):
 
     def get_bustime(self):
         try:
-            location_req_url = ''
+            location_req_url = bus_time_api
             # get json data
             r = requests.get(location_req_url)
             bustime_obj = json.loads(r.text)
-            # set bus to #199
-            departure_time = bustime_obj["departures"]["199"][0]["expected_departure_time"]
+            departure_time = bustime_obj["departures"][bus_line][0]["expected_departure_time"]
             time_now = time.strftime('%H:%M')  # hour in 12h format
             time_delta = datetime.strptime(departure_time,'%H:%M') - datetime.strptime(time_now,'%H:%M')
             minute_left = int(time_delta.seconds/60)
