@@ -1,12 +1,12 @@
 # bus-time
 Live bus time update using TransportAPI
 
-## Dependencies
-requests
-feedparser
-Pillow
+### Dependencies
+1) requests
+2) feedparser
+3) Pillow
 
-##### Instruction 
+### Instruction 
 1) Set bus number on bus_time.py line 20 
 2) Get token from https://transportapi.com, and amend bus_time.py line 21
 3) Run bus_time.py

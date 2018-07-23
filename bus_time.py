@@ -12,15 +12,12 @@ from PIL import Image, ImageTk
 from contextlib import contextmanager
 
 LOCALE_LOCK = threading.Lock()
-
 ui_locale = '' # e.g. 'fr_FR' fro French, '' as default
 time_format = 12 # 12 or 24
 date_format = "%b %d, %Y" # check python doc for strftime() for options
 news_country_code = 'uk'
 bus_line="199"
-bus_time_api=""
-weather_lang = 'en' # see https://darksky.net/dev/docs/forecast for full list of language parameters values
-weather_unit = 'us' # see https://darksky.net/dev/docs/forecast for full list of unit parameters values
+bus_time_api="https://transportapi.com/v3/uk/bus/stop/490006258W/live.json?app_id=68e2368a&app_key=123876d95adc4e2588a5939e7de860ef&group=route&nextbuses=yes"
 latitude = None#'51.421584' # Set this if IP location lookup does not work for you (must be a string)
 longitude = None#'0.279762' # Set this if IP location lookup does not work for you (must be a string)
 xlarge_text_size = 94
@@ -73,9 +70,7 @@ class Clock(Frame):
             if date2 != self.date1:
                 self.date1 = date2
                 self.dateLbl.config(text=date2)
-            # calls itself every 200 milliseconds
-            # to update the time display as needed
-            # could use >200 ms, but display gets jerky
+
             self.timeLbl.after(200, self.tick)
 
 class News(Frame):
@@ -114,10 +109,12 @@ class News(Frame):
 class NewsHeadline(Frame):
     def __init__(self, parent, event_name=""):
         Frame.__init__(self, parent, bg='black')
+
         image = Image.open("assets/Newspaper.png")
         image = image.resize((25, 25), Image.ANTIALIAS)
         image = image.convert('RGB')
         photo = ImageTk.PhotoImage(image)
+
         self.iconLbl = Label(self, bg='black', image=photo)
         self.iconLbl.image = photo
         self.iconLbl.pack(side=LEFT, anchor=N)
@@ -129,6 +126,7 @@ class Bustime(Frame):
     def __init__(self, parent, *args, **kwargs):
         Frame.__init__(self, parent, *args, **kwargs)
         self.config(bg='black')
+
         # self.minute_left = ''
         self.title = 'BUS'
         # self.bustimeLbl = self.minute_left
@@ -144,6 +142,7 @@ class Bustime(Frame):
             # get json data
             r = requests.get(location_req_url)
             bustime_obj = json.loads(r.text)
+            # set bus to #199
             departure_time = bustime_obj["departures"][bus_line][0]["expected_departure_time"]
             time_now = time.strftime('%H:%M')  # hour in 12h format
             time_delta = datetime.strptime(departure_time,'%H:%M') - datetime.strptime(time_now,'%H:%M')
