@@ -23,7 +23,7 @@ longitude = None#'0.279762' # Set this if IP location lookup does not work for y
 xlarge_text_size = 94
 large_text_size = 38
 medium_text_size = 28
-small_text_size = 18
+small_text_size = 14
 
 @contextmanager
 def setlocale(name): #thread proof function to work with locale
@@ -203,10 +203,8 @@ class FullscreenWindow:
         self.Bustime.pack(side=TOP, anchor=S, padx=100, pady=60)
         # news
         self.news = News(self.bottomFrame)
-        self.news.pack(side=LEFT, anchor=S, padx=0, pady=0)
-        # calender - removing for now
-        # self.calender = Calendar(self.bottomFrame)
-        # self.calender.pack(side = RIGHT, anchor=S, padx=100, pady=60)
+        self.news.pack(side=BOTTOM, anchor=S, padx=100, pady=100)
+
         self.tk.attributes("-fullscreen", True)
 
     def toggle_fullscreen(self, event=None):
