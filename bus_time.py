@@ -199,11 +199,11 @@ class FullscreenWindow:
         self.clock = Clock(self.bottomFrame)
         self.clock.pack(side=RIGHT, anchor=S, padx=100, pady=60)
         #Bus time
-        self.Bustime = Bustime(self.bottomFrame)
-        self.Bustime.pack(side=LEFT, anchor=S, padx=100, pady=60)
+        self.Bustime = Bustime(self.topFrame)
+        self.Bustime.pack(side=TOP, anchor=S, padx=100, pady=60)
         # news
-        #self.news = News(self.bottomFrame)
-        #self.news.pack(side=LEFT, anchor=S, padx=100, pady=60)
+        self.news = News(self.bottomFrame)
+        self.news.pack(side=LEFT, anchor=S, padx=0, pady=0)
         # calender - removing for now
         # self.calender = Calendar(self.bottomFrame)
         # self.calender.pack(side = RIGHT, anchor=S, padx=100, pady=60)
